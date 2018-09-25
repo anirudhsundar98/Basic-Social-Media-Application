@@ -3,8 +3,15 @@
   <head>
     <title>{{title}}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    {{#each stylesheets}}
+      <link rel='stylesheet' href='/stylesheets/{{this}}.css' />
+    {{/each}}
   </head>
   <body>
     {{{body}}}
   </body>
+  <script>
+    var a = "{{var3}}";
+    console.log(a);
+  </script>
 </html>
