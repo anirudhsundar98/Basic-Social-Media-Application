@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Home</title>
+  <link rel='stylesheet' href='stylesheets/style.css' />
+  <script src="javascripts/handlebars.min.js"></script>
+</head>
+
+<script id="template" type="text/x-handlebars-template">
+  <ul>
+    {{#each users}}
+      <li class="user"> {{this.username}} </div>
+    {{/each}}
+  </ul>
+</script>
+
+<body onload="fetchUsers()">
+  <div id="users-container"></div>
+  <br><br>
+  <button onclick="logout()">Logout</button>
+</body>
+
+<script src="javascripts/home.js"></script>
+</html>

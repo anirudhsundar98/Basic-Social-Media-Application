@@ -1,9 +1,9 @@
 let express = require('express');
+let root = require('./helpers/root');
 let router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', stylesheets: [] });
+  res.sendFile('home.html', { root });
 });
 
 module.exports = router;

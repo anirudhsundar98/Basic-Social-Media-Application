@@ -1,8 +1,8 @@
-const executeQuery = require('../../../helper-methods/sql-helpers');
+const { executeQuery } = require('../../../helpers/sql-helpers');
 
-let getAllUsers = () => {
+let getAllUsers = async () => {
   let queryString = "SELECT * FROM users";
-  let users = executeQuery(queryString);
+  let users = await executeQuery(queryString);
   return users;
 }
 

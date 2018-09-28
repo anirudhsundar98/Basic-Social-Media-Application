@@ -4,9 +4,11 @@ const schemaString = `
   type User {
     id: ID,
     username: String
-    first_name: String
-    last_name: String
-    age: Int
+  }
+
+  type MutationMessage {
+    success: Boolean
+    message: String
   }
 
   type Query {
@@ -14,7 +16,10 @@ const schemaString = `
   }
 
   type Mutation {
-    mut: String
+    createUser(
+      username: String
+      password: String
+    ): MutationMessage
   }
 
   type schema {
