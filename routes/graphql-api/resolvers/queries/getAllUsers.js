@@ -2,7 +2,12 @@ const { executeQuery } = require('../../../helpers/sql-helpers');
 
 let getAllUsers = async () => {
   let queryString = "SELECT * FROM users";
-  let users = await executeQuery(queryString);
+  let users = [];
+  try {
+    users = await executeQuery(queryString);
+  } catch(err) {
+    console.log(err);
+  }
   return users;
 }
 

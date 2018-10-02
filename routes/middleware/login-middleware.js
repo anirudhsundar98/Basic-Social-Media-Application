@@ -1,5 +1,5 @@
 function sessionCheck(req, res, next) {
-  if (!req.session.userID) {
+  if (!req.session.hasOwnProperty("userID")) {
     res.redirect("/login");
   } else {
     next();
@@ -7,7 +7,7 @@ function sessionCheck(req, res, next) {
 }
 
 function noSessionCheck(req, res, next) {
-  if (req.session.userID) {
+  if (req.session.hasOwnProperty("userID")) {
     res.redirect("/");
   } else {
     next();

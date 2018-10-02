@@ -22,8 +22,8 @@ router.post('/', async function (req, res, next) {
   let match = false;
   try {
     match = await bcrypt.compare(req.body.password, user.password);
-  } catch(e) {
-    throw e;
+  } catch(err) {
+    throw err;
   }
 
   if (match) {

@@ -6,7 +6,6 @@ const router = express.Router();
 router.delete('/', function (req, res, next) {
   req.session.destroy();
   res.send({ success: true });
-  // res.redirect("/login");
 });
 
 module.exports = router;

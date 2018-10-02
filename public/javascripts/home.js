@@ -2,7 +2,7 @@ async function fetchUsers() {
   let source = document.getElementById("template").innerHTML;
   let template = Handlebars.compile(source);
   let graphQLQuery = `{
-    "query": "query q2 { getAllUsers { username } }"
+    "query": "query UsersQuery { getAllUsers { username } }"
   }`;
 
   let data = await getUserData(graphQLQuery);
@@ -15,6 +15,7 @@ function getUserData(query) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: 'include',
     body: query
   })
   .then(response => response.json())

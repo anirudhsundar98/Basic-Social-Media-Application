@@ -9,10 +9,10 @@ let createUser = async (data) => {
   let queryString = `INSERT INTO users (username, password) VALUES ("${data.username}", "${hash}")`;
   try {
     await executeQuery(queryString);
-  } catch(error) {
+  } catch(err) {
     return {
       success: false,
-      message: error.message
+      message: err.message
     };
   }
 

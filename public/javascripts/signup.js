@@ -2,7 +2,7 @@ async function createUser() {
   let username = document.querySelector("#username").value;
   let password = document.querySelector("#password").value;
   let query = JSON.stringify({ 
-    query: `mutation m { createUser(username: "${username}", password:"${password}") { success message } }` 
+    query: `mutation Create { createUser(username: "${username}", password:"${password}") { success message } }` 
   });
 
   let response = await fetch("/graphql", {
