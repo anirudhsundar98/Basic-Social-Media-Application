@@ -1,9 +1,9 @@
-let express = require('express');
-let root = require('./helpers/root');
-let router = express.Router();
+const express = require('express');
+const appConfig = require('../config');
+const router = express.Router();
 
-router.get('/', function(req, res, next) {
-  res.sendFile('home.html', { root });
+router.get('/', (req, res, next) => {
+  res.redirect(appConfig.homeUrl);
 });
 
 module.exports = router;

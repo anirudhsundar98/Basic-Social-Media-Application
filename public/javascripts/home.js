@@ -21,7 +21,8 @@ function getUserData(query) {
   .then(response => response.json())
   .then(response => ({ 
     users: [...response.data.getAllUsers]
-  }) );
+  }) )
+  .catch(err => console.error(err));
 }
 
 async function logout() {

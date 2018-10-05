@@ -1,19 +1,25 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { noSessionCheck } = require("./middleware/login-middleware");
-const root = require('./helpers/root');
+const root = require('../config').sendFileRoot;
 const { executeQuery } = require('./helpers/sql-helpers');
 const router = express.Router();
 
 
 router.use(noSessionCheck);
 
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
   res.sendFile('login.html', { root });
 });
 
-router.post('/', async function (req, res, next) {
-  const user = (await executeQuery(`SELECT * FROM users WHERE username="${req.body.username}"`))[0];
+router.post('/', async (req, res, next) => {
+  let user = null;
+  try {
+    user = (await executeQuery(`SELECT * FROM users WHERE username="${req.body.username}"`))[0];
+  } catch (err) {
+    console.error(err);
+  }
+
   if (!user) {
     res.json({ success: false });
     return;
@@ -23,7 +29,7 @@ router.post('/', async function (req, res, next) {
   try {
     match = await bcrypt.compare(req.body.password, user.password);
   } catch(err) {
-    throw err;
+    console.error(err);
   }
 
   if (match) {

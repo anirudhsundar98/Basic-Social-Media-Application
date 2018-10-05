@@ -3,18 +3,19 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-let { buildSchema } = require('graphql');
-let session = require('express-session');
+let session = require('cookie-session');
 
 let app = express();
 let routes = require("./routes");
 
-app.set('trust proxy', 1) // trust first proxy
+app.set('trust proxy', 1); // trust first proxy
 app.use(session({
+  name: 'session',
   secret: 'nadia on mouse',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  secure: false
 }));
 
 app.use(logger('dev'));

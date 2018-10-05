@@ -13,7 +13,8 @@ async function createUser() {
     body: query
   })
   .then(response => response.json())
-  .then(response => ({...response.data.createUser}) ) ;
+  .then(response => ({...response.data.createUser}) )
+  .catch(err => console.error(err));
 
   if (response.success) {
     login(username, password);

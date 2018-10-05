@@ -11,7 +11,8 @@ async function login(name, pwd) {
     credentials: 'include',
     body: JSON.stringify(requestBody)
   })
-  .then(response => response.json());
+  .then(response => response.json())
+  .catch(err => console.error(err));
 
   if (response.success) {
     window.location.href = "/";

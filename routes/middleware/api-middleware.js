@@ -1,21 +1,28 @@
 function accessableAPICheck(req, res, next) {
-  if (req.url !== '/graphql' || req.session.hasOwnProperty("userID")) {
-    next();
-    return;
+  if (
+    req.app.get('env') === 'development' ||
+    req.url !== '/graphql' ||
+    req.session.hasOwnProperty("userID")
+  ) {
+    return next();
   }
 
   let validAPIPatterns = [
     /^mutation Create { createUser(.*?) {.*?} }$/
   ];
 
-  validAPIPatterns.forEach(pattern => {
-    console.log("req.body.query, pattern");
-    console.log(req.body.query, pattern);
-    if (req.body.query.match(pattern) === null) {
-      res.send({ success: false, message: "Unauthorized" });
-    }
-  });
+  let patternInvalid = true;
 
+  for (let pattern in validAPIPatterns) {
+    if (req.body.query.match(pattern) !== null) {
+      patternInvalid = false;
+      break;
+    }
+  };
+
+  if (patternInvalid) {
+    return res.send({ success: false, message: "Unauthorized" });
+  }
   next();
 }
 

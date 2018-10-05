@@ -1,10 +1,10 @@
 const express = require('express');
 const { noSessionCheck } = require("./middleware/login-middleware");
-const root = require('./helpers/root');
+const root = require('../config').sendFileRoot;
 const router = express.Router();
 
-router.delete('/', function (req, res, next) {
-  req.session.destroy();
+router.delete('/', (req, res, next) => {
+  req.session = null;
   res.send({ success: true });
 });
 
