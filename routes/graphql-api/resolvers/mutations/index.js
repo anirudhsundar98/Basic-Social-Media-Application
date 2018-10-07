@@ -1,3 +1,4 @@
 const createUser = require('./createUser');
+const createPost = require('./createPost');
 
-module.exports = { createUser };
+module.exports = { createUser, createPost };

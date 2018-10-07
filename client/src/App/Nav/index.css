@@ -1,0 +1,38 @@
+div#logout-button {
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  padding: 15px 32px;
+
+  background-color: #c82333;
+  color: white;
+  display: inline-block;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 2px 7px gray;
+
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+div#logout-button:hover {
+  box-shadow: 1px 2px 7px gray, 2px 3px 10px black;
+}
+
+div#logout-button:active {
+  box-shadow: 0 0;
+  background: #7c1721;
+}
+
+@media (orientation: portrait) {
+  div#logout-button {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 20px 0 30px;
+  }
+}

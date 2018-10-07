@@ -6,6 +6,13 @@ const schemaString = `
     username: String
   }
 
+  type Post {
+    id: ID,
+    user: User,
+    content: String
+    createdAt: String
+  }
+
   type MutationMessage {
     success: Boolean
     message: String
@@ -13,12 +20,16 @@ const schemaString = `
 
   type Query {
     getAllUsers: [User]
+    getAllPosts: [Post]
   }
 
   type Mutation {
     createUser(
       username: String
       password: String
+    ): MutationMessage
+    createPost(
+      content: String
     ): MutationMessage
   }
 
