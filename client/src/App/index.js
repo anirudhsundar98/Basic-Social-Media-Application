@@ -13,21 +13,7 @@ export default class App extends Component {
       session: { username: null }
     };
     this.sendGraphQLQuery = this.sendGraphQLQuery.bind(this);
-  }
-
-  async getSession() {
-    let currentUser = await fetch(serverRoot + "/session", {
-      credentials: "include"
-    })
-    .then(response => response.json())
-    .catch(err => null);
-
-    if (currentUser === null) {
-      window.location.href = serverRoot + "/login";
-      return;
-    }
-
-    this.setState({ session: currentUser });
+    this.checkSession = this.checkSession.bind(this);
   }
 
   sendGraphQLQuery(query) {
@@ -42,14 +28,60 @@ export default class App extends Component {
     .then(response => response.json());
   }
 
-  componentDidMount() {
-    this.getSession();
+  async getCurrentSession() {
+    let graphQLQuery = `{ "query":
+      "query getUser {
+        getCurrentUser {
+          id
+          username
+        }
+      }"
+    }`;
+    let currentUser = await this.sendGraphQLQuery(graphQLQuery)
+      .then( response => response.data.getCurrentUser )
+      .catch( err => {
+        console.error(err);
+        return null;
+      });
+
+    if (currentUser === null) {
+      window.location.href = serverRoot + "/login";
+      return;
+    }
+
+    this.setState({ session: currentUser });
+  }
+
+  async checkSession() {
+    let graphQLQuery = `{ "query":
+      "query getSession {
+        getSession
+      }"
+    }`;
+
+    let sessionId = await this.sendGraphQLQuery(graphQLQuery)
+      .then( response => response.data.getSession )
+      .catch( err => {
+        console.error(err);
+        return null;
+      });
+
+    if (!sessionId) {
+      alert("Your session has expired. Please log back in.")
+      window.location.href = serverRoot + "/login";
+      return;
+    }
+  }
+
+  async componentDidMount() {
+    await this.getCurrentSession();
   }
 
   render() {
     let appProps = {
       sendGraphQLQuery: this.sendGraphQLQuery,
-      session: this.state.session
+      session: this.state.session,
+      checkSession: this.checkSession
     };
 
     return (

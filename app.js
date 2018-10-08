@@ -14,7 +14,7 @@ app.use(session({
   secret: 'nadia on mouse',
 
   // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
   secure: false
 }));
 

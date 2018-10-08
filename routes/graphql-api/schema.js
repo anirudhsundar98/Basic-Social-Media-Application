@@ -31,6 +31,8 @@ const schemaString = `
   type Query {
     getPost(id: ID!): Post
     getAllPosts: [Post]
+    getCurrentUser: User
+    getSession: Int
   }
 
   type Mutation {

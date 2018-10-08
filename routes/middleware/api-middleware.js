@@ -1,6 +1,5 @@
 function accessableAPICheck(req, res, next) {
   if (
-    req.app.get('env') === 'development' ||
     req.url !== '/graphql' ||
     req.session.hasOwnProperty("userID")
   ) {
@@ -21,7 +20,8 @@ function accessableAPICheck(req, res, next) {
   };
 
   if (patternInvalid) {
-    return res.send({ success: false, message: "Unauthorized" });
+    console.error("Unauthorized API access.");
+    return res.send({error: { message: "Unauthorized API call" }});
   }
   next();
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NewPostForm from "./NewPostForm";
 import SimplePost from "./SimplePost";
+import config from "../config";
 import "./index.css";
 
 export class Home extends Component {
@@ -67,8 +68,20 @@ export class Home extends Component {
         return null;
       });
 
-    if (response === null || !response.data.createPost.success) {
-      alert("Unable to create post. " + ((response) ? response.message : null));
+    if (response === null) {
+      alert("Unable to create post.");
+      return;
+    }
+
+    if (response.error && response.error.message === "Unauthorized API call") {
+      alert("Your session has expired. Please log back in.")
+      window.location.href = config.serverRoot + "/login";
+      return;
+    }
+
+    if (!response.data.createPost.success) {
+      alert("Unable to create post. " + response.message);
+      return;
     }
 
     // Refresh
@@ -77,6 +90,7 @@ export class Home extends Component {
   }
 
   componentDidMount() {
+    this.props.checkSession();
     this.fetchPosts();
   }
 

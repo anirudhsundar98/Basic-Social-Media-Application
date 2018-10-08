@@ -5,7 +5,6 @@ let indexRouter = require('./routes/index');
 let signupRouter = require('./routes/signup');
 let loginRouter = require('./routes/login');
 let logoutRouter = require('./routes/logout');
-let sessionRouter = require('./routes/session');
 let graphQLRouter = require('./routes/graphql-api');
 let cors = require('./routes/middleware/cors');
 let { sessionCheck } = require('./routes/middleware/login-middleware');
@@ -19,7 +18,6 @@ router.use(accessableAPICheck);
 router.use('/graphql', graphQLRouter);
 
 router.use(sessionCheck);
-router.use('/session', sessionRouter);
 router.use('/logout', logoutRouter);
 router.use('*', indexRouter);
 

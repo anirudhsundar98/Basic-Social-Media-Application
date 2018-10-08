@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import SinglePost from "./SinglePost";
+import config from "../config";
 import "./index.css";
 
 export class Post extends Component {
@@ -78,9 +79,20 @@ export class Post extends Component {
         return null;
       });
 
-    if (response === null || !response.data.createComment.success) {
-      console.log(response);
-      alert("Unable to create comment. " + ((response) ? response.message : null));
+    if (response === null) {
+      alert("Unable to create comment.");
+      return;
+    }
+
+    if (response.error && response.error.message === "Unauthorized API call") {
+      alert("Your session has expired. Please log back in.")
+      window.location.href = config.serverRoot + "/login";
+      return;
+    }
+
+    if (!response.data.createComment.success) {
+      alert("Unable to create comment. " + response.message);
+      return;
     }
 
     // Refresh
@@ -89,6 +101,7 @@ export class Post extends Component {
   }
 
   async componentDidMount() {
+    this.props.checkSession();
     this.fetchPost();
   }
 
@@ -96,8 +109,6 @@ export class Post extends Component {
     if (this.state.return) {
       return <Redirect push to={"/"} />;
     }
-
-    // let post = 
 
     return (
       <SinglePost
