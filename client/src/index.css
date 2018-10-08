@@ -8,3 +8,35 @@ body {
   font-family: sans-serif;
   background: #e9ebee;
 }
+
+div.normal-button {
+  margin: 4px 0;
+  padding: 10px 24px;
+
+  /* position: absolute;
+  left: 50%;
+  transform: translateX(-50%); */
+
+  background-color: #4267b2;
+  color: white;
+  display: inline-block;
+  font-size: 13px;
+  text-align: center;
+  text-decoration: none;
+
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 2px 7px gray;
+
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+div.normal-button:hover {
+  box-shadow: 1px 2px 7px gray, 2px 3px 10px black;
+}
+
+div.normal-button:active {
+  box-shadow: 0 0;
+  background: #284070;
+}

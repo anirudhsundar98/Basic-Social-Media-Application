@@ -23,6 +23,14 @@ export class Home extends Component {
             id
             username
           }
+          comments {
+            user {
+              id
+              username
+            }
+            content
+            createdAt
+          }
           content
           createdAt
         }
@@ -59,9 +67,8 @@ export class Home extends Component {
         return null;
       });
 
-    // TODO: Handle notifications
-    if (response === null || !response.success) {
-      console.log(response);
+    if (response === null || !response.data.createPost.success) {
+      alert("Unable to create post. " + ((response) ? response.message : null));
     }
 
     // Refresh
@@ -69,7 +76,7 @@ export class Home extends Component {
     document.querySelector("#post-content").value = null;
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.fetchPosts();
   }
 
@@ -78,15 +85,17 @@ export class Home extends Component {
       return (
         <SimplePost
           key={post.id}
+          id={post.id}
           username={post.user.username}
           content={post.content}
           createdAt={post.createdAt}
+          comment={post.comments[0]}
         />
-      )
+      );
     });
 
     return (
-      <React.Fragment>
+      <div id="main-page-container">
         <NewPostForm 
           createPost={this.createPost} 
         />
@@ -94,7 +103,7 @@ export class Home extends Component {
         <div id="posts-container">
           {posts}
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

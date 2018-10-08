@@ -5,7 +5,7 @@ export default class NewPostForm extends Component {
     return (
       <div id="post-creation-container">
         <textarea id="post-content" placeholder="What's on your mind?"></textarea> <br />
-        <div id="create-post-button" onClick={this.props.createPost}>Create Post</div>
+        <div className="normal-button" id="create-post-button" onClick={this.props.createPost}>Create Post</div>
       </div>
     );
   }

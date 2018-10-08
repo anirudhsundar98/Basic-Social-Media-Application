@@ -1,0 +1,21 @@
+.post-header {
+  padding: 13px;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+div.timestamp {
+  font-style: italic;
+  font-size: 10px;
+  color: #777;
+}
+
+div.content {
+  padding: 13px;
+  padding-bottom: 26px;
+  text-align: justify;
+  border-bottom: 1px solid black;
+}

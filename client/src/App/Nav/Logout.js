@@ -19,7 +19,7 @@ export class Logout extends Component {
 
   render() {
     return (
-      <div id="logout-button" onClick={this.logout}>Logout</div>
+      <div id="logout-button" className="nav-button" onClick={this.logout}>Logout</div>
     );
   }
 }

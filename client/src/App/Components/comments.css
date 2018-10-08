@@ -1,0 +1,11 @@
+span.user-name {
+  font-size: 17px;
+  font-style: italic;
+}
+
+div.comment {
+  margin: 8px;
+  padding: 10px;
+  background: #dadcdf;
+  border-radius: 18px;
+}

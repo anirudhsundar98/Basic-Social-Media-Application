@@ -1,6 +1,6 @@
 const { executeQuery } = require('../../../helpers/sql-helpers');
 
-let createPost = async (data, req) => {
+let createComment = async (data, req) => {
   const userID = req.session.userID;
   if (userID === null) {
     return {
@@ -9,7 +9,7 @@ let createPost = async (data, req) => {
     };
   }
 
-  let queryString = `INSERT INTO posts (user_id, created_at, content) VALUES (${userID}, NOW(), "${data.content}");`;
+  let queryString = `INSERT INTO comments (user_id, post_id, created_at, content) VALUES (${userID}, ${data.postId}, NOW(), "${data.content}");`;
   try {
     await executeQuery(queryString);
   } catch (err) {
@@ -26,4 +26,4 @@ let createPost = async (data, req) => {
   };
 }
 
-module.exports = createPost;
+module.exports = createComment;

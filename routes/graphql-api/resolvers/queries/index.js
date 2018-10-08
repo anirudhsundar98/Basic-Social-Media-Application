@@ -1,4 +1,4 @@
-let getAllUsers = require("./getAllUsers");
+let getPost = require("./getPost");
 let getAllPosts = require("./getAllPosts");
 
-module.exports = { getAllUsers, getAllPosts };
+module.exports = { getPost, getAllPosts };
