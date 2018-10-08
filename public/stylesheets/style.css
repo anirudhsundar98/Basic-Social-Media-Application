@@ -1,8 +1,72 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
+  background: #e9ebee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
   color: #00B7FF;
+}
+
+h1 {
+  position: relative;
+  top: -15px;
+}
+
+#form {
+  width: 350px;
+  height: 350px;
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 1px 2px 7px gray;
+}
+
+input {
+  width: 60%;
+  height: 35px;
+  margin: 5px;
+}
+
+button.normal-button {
+  margin: 4px 0;
+  padding: 10px 24px;
+
+  background-color: #4267b2;
+  color: white;
+  display: inline-block;
+  font-size: 13px;
+  text-align: center;
+  text-decoration: none;
+
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 2px 7px gray;
+
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+button.normal-button:hover {
+  box-shadow: 1px 2px 7px gray, 2px 3px 10px black;
+}
+
+button.normal-button:active {
+  box-shadow: 0 0;
+  background: #284070;
 }

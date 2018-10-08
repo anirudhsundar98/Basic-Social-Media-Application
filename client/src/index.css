@@ -13,10 +13,6 @@ div.normal-button {
   margin: 4px 0;
   padding: 10px 24px;
 
-  /* position: absolute;
-  left: 50%;
-  transform: translateX(-50%); */
-
   background-color: #4267b2;
   color: white;
   display: inline-block;
