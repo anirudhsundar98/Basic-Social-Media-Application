@@ -1,30 +1,48 @@
 const { executeQuery } = require('../../../helpers/sql-helpers');
 const { processDate } = require('../../../helpers/date-helpers');
 
-let getAllPosts = async () => {
+let getPosts = async (data) => {
+  let postsWhereClause = (data.username) ? `WHERE users.username = "${data.username}"` : "";
+  let posts = [];
   let postsQueryString = `
     SELECT posts.id, users.id AS userId, users.username, posts.content, posts.created_at AS createdAt
     FROM posts LEFT JOIN users
     ON posts.user_id = users.id
+    ${postsWhereClause}
     ORDER BY id DESC;
   `;
+  
+  try {
+    posts = await executeQuery(postsQueryString);
+  } catch(err) {
+    console.error(err);
+    throw err;
+  }
+
+  if (posts.length === 0) {
+    return posts;
+  }
+  
+  let postsSet = createHashSet(posts);
+  let postsIds = Object.keys(postsSet).map(Number);
+  
+  let commentsWhereClause = (postsIds.length !== 0) ? `WHERE comments.post_id IN (${postsIds.join(", ")})` : "";
+  let comments = [];
   let commentsQueryString = `
     SELECT comments.id, comments.user_id AS userId, users.username, comments.post_id AS postId, comments.created_at AS createdAt, comments.content
     FROM comments LEFT JOIN users
     ON comments.user_id = users.id
+    ${commentsWhereClause}
     ORDER BY id;
   `;
-  let posts = [];
-  let comments = [];
   try {
-    posts = executeQuery(postsQueryString);
-    comments = executeQuery(commentsQueryString);
+    comments = await executeQuery(commentsQueryString);
   } catch(err) {
     console.error(err);
+    throw err;
   }
 
-  let postsSet = createHashSet(await posts);
-  posts = addCommentsToPosts(postsSet, await comments);
+  posts = addCommentsToPosts(postsSet, comments);
   transform(posts);
   return posts;
 }
@@ -43,6 +61,7 @@ function addCommentsToPosts(postsSet, comments) {
   comments.forEach( comment => {
     // This is done to get only the latest comment to the post.
     // This works since comments are ordered by id and id is set to AUTO_INCREMENT.
+    // TODO: Unoptimal. Change Later
     postsSet[comment.postId].comments[0] = comment;
   });
 
@@ -80,7 +99,6 @@ function transform(posts) {
       username: comment.username
     };
     comment.createdAt = processDate(comment.createdAt);
-    // comment.post = post;  // Fits the schema but unnecessary.
 
     delete comment.userId;
     delete comment.username;
@@ -88,4 +106,4 @@ function transform(posts) {
   });
 }
 
-module.exports = getAllPosts;
+module.exports = getPosts;

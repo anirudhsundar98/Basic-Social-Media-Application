@@ -7,11 +7,12 @@
 </head>
 
 <body>
-  <div id="form">
+  <div id="form" onkeydown="enterLogin(window.event)">
     <h1>Login</h1>
     <input type="text" id="username" name="username" placeholder="username">
     <input type="password" id="password" name="password" placeholder="password">
     <button class="normal-button" onclick="login()">Login</button>
+    <div class="go-to">Go to <a href="/signup">Sign Up Page</a></div>
   </div>
 </body>
 <script src="javascripts/login.js"></script>

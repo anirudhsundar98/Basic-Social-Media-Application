@@ -13,10 +13,6 @@ body {
   align-items: center;
 }
 
-a {
-  color: #00B7FF;
-}
-
 h1 {
   position: relative;
   top: -15px;
@@ -69,4 +65,14 @@ button.normal-button:hover {
 button.normal-button:active {
   box-shadow: 0 0;
   background: #284070;
+}
+
+div.go-to {
+  color: gray;
+  font-size: 14px;
+  margin: 20px 0 0;
+}
+
+div.go-to > a {
+  color: #4267b2;
 }

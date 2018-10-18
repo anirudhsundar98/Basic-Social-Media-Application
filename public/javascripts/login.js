@@ -20,3 +20,9 @@ async function login(name, pwd) {
     console.log("Unable to login");
   }
 }
+
+function enterLogin(event) {
+  if(event.keyCode === 13) {
+    login();
+  }
+}

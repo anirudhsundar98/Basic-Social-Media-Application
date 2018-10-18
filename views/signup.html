@@ -7,11 +7,12 @@
 </head>
 
 <body>
-  <div id="form">
+  <div id="form" onkeydown="enterSignup(window.event)">
     <h1>Sign Up</h1>
     <input type="text" id="username" name="username" placeholder="username">
     <input type="password" id="password" name="password" placeholder="password">
     <button id="submit" class="normal-button" onclick="createUser()">Sign Up</button>
+    <div class="go-to">Go to <a href="/login">Login Page</a></div>
   </div>
 </body>
 

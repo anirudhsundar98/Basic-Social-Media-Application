@@ -9,7 +9,7 @@ export class Post extends Component {
     super(props);
     this.state = {
       post: {
-        id: window.location.pathname.split("/")[2]  // Nice comfy hard coded id
+        id: this.props.match.params.id
       },
       return: false
     };

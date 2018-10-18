@@ -1,10 +1,16 @@
 let { buildSchema } = require('graphql');
 
+/**
+ * This schema does not have some features that a complete app would have.
+ * For instance, Comment should have a Post field that gives information on its parent post 
+ *   However this is unnecessary as the app never fetches comments alone. It always fetches posts and their comments.
+ * Similarly, User could have a posts field to represent their posts.
+ *   However, user posts are fetched through getPosts to avoid redundant code in the getUser query.
+ */
 const schemaString = `
   type User {
     id: ID!
     username: String!
-    posts: [Post]
   }
 
   type Post {
@@ -18,7 +24,6 @@ const schemaString = `
   type Comment {
     id: ID!
     user: User!
-    post: Post
     content: String!
     createdAt: String
   }
@@ -29,9 +34,10 @@ const schemaString = `
   }
 
   type Query {
-    getPost(id: ID!): Post
-    getAllPosts: [Post]
+    getUser(id: ID!): User
     getCurrentUser: User
+    getPost(id: ID!): Post
+    getPosts(username: String): [Post]
     getSession: Int
   }
 

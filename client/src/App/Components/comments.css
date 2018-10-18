@@ -3,6 +3,10 @@ span.user-name {
   font-style: italic;
 }
 
+span.user-name > a {
+  color: #365899;
+}
+
 div.comment {
   margin: 8px;
   padding: 10px;

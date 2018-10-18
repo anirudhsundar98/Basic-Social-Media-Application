@@ -22,3 +22,9 @@ async function createUser() {
     console.log(response.message);
   }
 }
+
+function enterSignup(event) {
+  if (event.keyCode === 13) {
+    createUser();
+  }
+}

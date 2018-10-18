@@ -1,0 +1,22 @@
+.simple-post {
+  margin: 10px;
+  border: 1px solid gray;
+  border-radius: 3px;
+  background: white;
+  width: 65%;
+}
+
+div.full-post-link {
+  margin: 10px 22px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+div.full-post-link > a {
+  text-decoration: none;
+  color: #365899;
+}
+
+div.full-post-link > a:hover {
+  text-decoration: underline;
+}

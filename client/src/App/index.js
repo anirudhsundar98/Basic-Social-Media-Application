@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Nav } from "./Nav";
 import { Home } from "./Home";
 import { Post } from "./Post";
+import { User } from "./User";
 import config from "./config";
 const serverRoot = config.serverRoot;
 
@@ -99,6 +100,12 @@ export default class App extends Component {
               exact path="/posts/:id"
               render={ (routeProps) => (
                 <Post {...appProps} {...routeProps} />
+              )}
+            />
+            <Route
+              exact path="/users/:username"
+              render={ (routeProps) => (
+                <User {...appProps} {...routeProps} />
               )}
             />
           </Switch>

@@ -30,16 +30,3 @@ textarea#post-content {
   left: 50%;
   transform: translateX(-50%);
 }
-
-/* SimplePost */
-.simple-post {
-  margin: 10px;
-  border: 1px solid gray;
-  border-radius: 3px;
-  background: white;
-  width: 75%;
-}
-
-.simple-post:hover {
-  cursor: pointer;
-}

@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
-import NewPostForm from "./NewPostForm";
 import SimplePost from "../Components/SimplePost";
-import config from "../config";
 import "./index.css";
 
-export class Home extends Component {
+export class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
       posts: []
     };
-
-    this.createPost = this.createPost.bind(this);
   }
 
-  // Get all Posts
+  // Get User's Posts
   async fetchPosts() {
     let graphQLQuery = `{ "query":
       "query PostsQuery {
-        getPosts {
+        getPosts(username: \\"${this.props.match.params.username}\\") {
           id
           user {
             id
@@ -48,45 +44,11 @@ export class Home extends Component {
     this.setState({ posts });
   };
 
-  // Create a Post
-  async createPost() {
-    let postContent = document.querySelector("#post-content").value;
-    const graphQLQuery = `{ "query":
-      "mutation CreatePost {
-        createPost(
-          content: \\"${postContent}\\"
-        ) {
-          success
-          message
-        }
-      }"
-    }`;
-
-    let response = await this.props.sendGraphQLQuery(graphQLQuery)
-      .catch(err => {
-        console.error(err);
-        return null;
-      });
-
-    if (response === null) {
-      alert("Unable to create post.");
-      return;
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.username !== prevProps.match.params.username) {
+      this.props.checkSession();
+      this.fetchPosts();
     }
-
-    if (response.error && response.error.message === "Unauthorized API call") {
-      alert("Your session has expired. Please log back in.")
-      window.location.href = config.serverRoot + "/login";
-      return;
-    }
-
-    if (!response.data.createPost.success) {
-      alert("Unable to create post. " + response.message);
-      return;
-    }
-
-    // Refresh
-    this.fetchPosts();
-    document.querySelector("#post-content").value = null;
   }
 
   componentDidMount() {
@@ -95,7 +57,7 @@ export class Home extends Component {
   }
 
   render() {
-    let posts = this.state.posts.map( (post) => {
+    let posts = this.state.posts.map((post) => {
       return (
         <SimplePost
           key={post.id}
@@ -108,11 +70,14 @@ export class Home extends Component {
       );
     });
 
+    let title = (this.props.session)
+      ? (this.props.match.params.username === this.props.session.username) ? "Your" : `${this.props.match.params.username}'s`
+      : null
+    ;
+
     return (
       <div id="main-page-container">
-        <NewPostForm 
-          createPost={this.createPost} 
-        />
+        <h1>{title} page</h1>
 
         <div id="posts-container">
           {posts}

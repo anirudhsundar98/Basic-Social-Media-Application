@@ -13,7 +13,7 @@ let getPost = async (data) => {
     FROM comments LEFT JOIN users
     ON comments.user_id = users.id
     WHERE comments.post_id = ${data.id}
-    ORDER BY id DESC;
+    ORDER BY id;
   `;
   let post = [];
   let comments = [];
@@ -54,9 +54,7 @@ function transform(post) {
       id: comment.userId,
       username: comment.username
     };
-
     comment.createdAt = processDate(comment.createdAt);
-    // comment.post = post;  // Fits the schema but unnecessary.
 
     delete comment.userId;
     delete comment.username;

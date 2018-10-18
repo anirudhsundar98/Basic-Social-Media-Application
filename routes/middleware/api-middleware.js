@@ -12,7 +12,7 @@ function accessableAPICheck(req, res, next) {
 
   let patternInvalid = true;
 
-  for (let pattern in validAPIPatterns) {
+  for (let pattern of validAPIPatterns) {
     if (req.body.query.match(pattern) !== null) {
       patternInvalid = false;
       break;
