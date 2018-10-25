@@ -34,6 +34,7 @@ const schemaString = `
   }
 
   type Query {
+    userExists(username: String!): Boolean
     getUser(id: ID!): User
     getCurrentUser: User
     getPost(id: ID!): Post

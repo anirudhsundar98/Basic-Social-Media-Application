@@ -6,8 +6,18 @@ function accessableAPICheck(req, res, next) {
     return next();
   }
 
+  // Dev only
+  if (req.body.query === undefined) {
+    if (req.app.get('env') === 'development') {
+      return next();
+    } else {
+      return res.send({ error: { message: "Undefined Query" } });
+    }
+  }
+
   let validAPIPatterns = [
-    /^mutation Create { createUser(.*?) {.*?} }$/
+    /^mutation Create { createUser(.*?) {.*?} }$/,
+    /^query userExists { userExists\(username: ".*?"\) }$/
   ];
 
   let patternInvalid = true;
