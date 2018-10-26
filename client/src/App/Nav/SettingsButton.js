@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 
-export class MainPageButton extends Component {
+export class SettingsButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      goHome: false
+      goToSettings: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.setState({ goHome: true })
+    this.setState({ goToSettings: true })
   }
 
   render() {
-    if (this.state.goHome) {
-      return <Redirect push to={"/"} />;
+    if (this.state.goToSettings) {
+      return <Redirect push to={"/settings"} />;
     }
 
     return (
       <div className="normal-button large-button" id="main-page-button" onClick={this.handleClick}>
-        Main Page
+        Settings
       </div>
     );
   }

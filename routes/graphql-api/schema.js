@@ -7,6 +7,14 @@ let { buildSchema } = require('graphql');
  * Similarly, User could have a posts field to represent their posts.
  *   However, user posts are fetched through getPosts to avoid redundant code in the getUser query.
  */
+/**
+ * It might also seem weird that MutationMessages are being used for failed requests as well
+ * rather than just throwing an error.
+ * This is a result of incomplete understanding of how graphql functions in the initial stages of the project
+ * and too much lazyness to correct it towards the end of the project.
+ * It also turned out that this made formatting return data from the fetch requests easier.
+ * As a result, a mutation message is returned for all mutations to maintain homogeneity.
+ */
 const schemaString = `
   type User {
     id: ID!
@@ -46,6 +54,15 @@ const schemaString = `
     createUser(
       username: String!
       password: String!
+    ): MutationMessage
+    updateUser(
+      currentUsername: String!
+      updatedField: String!
+      newUsername: String
+      newPassword: String
+    ): MutationMessage
+    deleteUser(
+      userId: Int!
     ): MutationMessage
     createPost(
       content: String!

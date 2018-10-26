@@ -17,7 +17,7 @@ async function login(name, pwd) {
   if (response.success) {
     window.location.href = "/";
   } else {
-    console.log("Unable to login");
+    alert("Unable to login");
   }
 }
 

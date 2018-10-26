@@ -80,7 +80,7 @@ export class Home extends Component {
     }
 
     if (!response.data.createPost.success) {
-      alert("Unable to create post. " + response.message);
+      alert("Unable to create post. " + response.data.createPost.message);
       return;
     }
 
@@ -90,7 +90,6 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.checkSession();
     this.fetchPosts();
   }
 

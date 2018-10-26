@@ -8,8 +8,7 @@ nav {
   height: 150px;
 }
 
-/* Logout button */
-div.nav-button {
+div.large-button {
   width: 70px;
   margin: 0 20px;
   padding: 15px 32px;
@@ -27,7 +26,7 @@ div.nav-button {
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
 }
-.nav-button:hover {
+.large-button:hover {
   box-shadow: 1px 2px 7px gray, 2px 3px 10px black;
 }
 

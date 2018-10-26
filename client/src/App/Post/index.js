@@ -91,7 +91,7 @@ export class Post extends Component {
     }
 
     if (!response.data.createComment.success) {
-      alert("Unable to create comment. " + response.message);
+      alert("Unable to create comment. " + response.data.createComment.message);
       return;
     }
 
@@ -101,7 +101,6 @@ export class Post extends Component {
   }
 
   async componentDidMount() {
-    this.props.checkSession();
     this.fetchPost();
   }
 

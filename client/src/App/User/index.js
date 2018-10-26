@@ -46,13 +46,11 @@ export class User extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.username !== prevProps.match.params.username) {
-      this.props.checkSession();
       this.fetchPosts();
     }
   }
 
   componentDidMount() {
-    this.props.checkSession();
     this.fetchPosts();
   }
 

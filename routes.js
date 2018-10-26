@@ -3,6 +3,7 @@ let router = express.Router();
 
 let indexRouter = require('./routes/index');
 let signupRouter = require('./routes/signup');
+let authenticationRouter = require('./routes/authenticate');
 let loginRouter = require('./routes/login');
 let logoutRouter = require('./routes/logout');
 let graphQLRouter = require('./routes/graphql-api');
@@ -18,6 +19,7 @@ router.use(accessableAPICheck);
 router.use('/graphql', graphQLRouter);
 
 router.use(sessionCheck);
+router.use('/authenticate', authenticationRouter);
 router.use('/logout', logoutRouter);
 router.use('*', indexRouter);
 

@@ -1,0 +1,48 @@
+#settings-container {
+  margin: 10px;
+  padding: 30px;
+  width: 500px;
+  height: 200px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 1px 2px 7px gray;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s;
+}
+
+h2#settings-title {
+  margin-top: 0;
+}
+
+input {
+  width: 50%;
+  height: 35px;
+  margin: 5px;
+}
+
+div.update-form-container {
+  width: 100%;
+  text-align: center;
+}
+
+div.update-form-button {
+  width: 155px;
+}
+
+div#delete-account-button {
+  margin: 10px 0 5px;
+  background-color: #c82333;
+}
+div#delete-account-button:active {
+  box-shadow: 0 0;
+  background: #7c1721;
+}

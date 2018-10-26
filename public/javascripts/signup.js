@@ -19,7 +19,7 @@ async function createUser() {
   if (response.success) {
     login(username, password);
   } else {
-    console.log(response.message);
+    alert(response.message);
   }
 }
 

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Nav } from "./Nav";
+import { SessionChecker } from "./Components/SessionChecker";
 import { Home } from "./Home";
+import { Settings } from "./Settings";
 import { Post } from "./Post";
 import { User } from "./User";
 import config from "./config";
@@ -11,10 +13,10 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      session: { username: null }
+      session: { id: -1, username: null }
     };
     this.sendGraphQLQuery = this.sendGraphQLQuery.bind(this);
-    this.checkSession = this.checkSession.bind(this);
+    this.updateStateUsername = this.updateStateUsername.bind(this);
   }
 
   sendGraphQLQuery(query) {
@@ -53,25 +55,13 @@ export default class App extends Component {
     this.setState({ session: currentUser });
   }
 
-  async checkSession() {
-    let graphQLQuery = `{ "query":
-      "query getSession {
-        getSession
-      }"
-    }`;
-
-    let sessionId = await this.sendGraphQLQuery(graphQLQuery)
-      .then( response => response.data.getSession )
-      .catch( err => {
-        console.error(err);
-        return null;
-      });
-
-    if (!sessionId) {
-      alert("Your session has expired. Please log back in.")
-      window.location.href = serverRoot + "/login";
-      return;
-    }
+  updateStateUsername(username) {
+    this.setState({
+      session: {
+        id: this.state.session.id,
+        username: username
+      }
+    })
   }
 
   async componentDidMount() {
@@ -81,19 +71,26 @@ export default class App extends Component {
   render() {
     let appProps = {
       sendGraphQLQuery: this.sendGraphQLQuery,
-      session: this.state.session,
-      checkSession: this.checkSession
+      session: this.state.session
     };
 
     return (
       <Router>
         <React.Fragment>
-          <Nav />
+          {/* Uncomment the line below if regular session checks are necessary */}
+          {/* <SessionChecker sendGraphQLQuery={this.sendGraphQLQuery} /> */}
+          <Nav session={this.state.session} />
           <Switch>
             <Route
               exact path="/"
               render={ (routeProps) => (
                 <Home {...appProps} {...routeProps} />
+              )}
+            />
+            <Route
+              exact path="/settings"
+              render={ (routeProps) => (
+                <Settings updateStateUsername={this.updateStateUsername} {...appProps} {...routeProps} />
               )}
             />
             <Route
