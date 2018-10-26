@@ -35,6 +35,15 @@ export class User extends Component {
     }`;
 
     let posts = await this.props.sendGraphQLQuery(graphQLQuery)
+      .then(response => {
+        if (response.errors) {
+          alert(response.errors[0].message);
+          window.location.href = "/";
+          throw new Error(response.errors[0].message);
+        }
+
+        return response;
+      })
       .then(response => ([...response.data.getPosts]))
       .catch(err => {
         console.error(err);

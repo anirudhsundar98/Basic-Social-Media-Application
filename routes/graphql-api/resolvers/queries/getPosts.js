@@ -2,7 +2,22 @@ const { executeQuery } = require('../../../helpers/sql-helpers');
 const { processDate } = require('../../../helpers/date-helpers');
 
 let getPosts = async (data) => {
-  let postsWhereClause = (data.username) ? `WHERE users.username = "${data.username}"` : "";
+  let postsWhereClause = "";
+
+  if (data.username) {
+    let userQueryString = `SELECT * FROM users WHERE username = "${data.username}";`;
+    let user = [];
+    try {
+      user = await executeQuery(userQueryString);
+    } catch (err) {
+      console.error(err);
+    }
+
+    if (user.length === 0) {
+      throw new Error("User does not Exist");
+    }
+    postsWhereClause = `WHERE users.username = "${data.username}"`;
+  }
   let posts = [];
   let postsQueryString = `
     SELECT posts.id, users.id AS userId, users.username, posts.content, posts.created_at AS createdAt

@@ -4,7 +4,7 @@ import "./comments.css";
 
 export default class Comment extends Component {
   render() {
-    let usernameSpan = (window.location.pathname === `/users/${this.props.username}`)
+    let usernameSpan = (window.location.pathname === `/users/${escape(this.props.username)}`)
       ? <span className="user-name"> {this.props.username}: </span>
       : <span className="user-name user-name-linked"> <Link to={"/users/" + this.props.username}> {this.props.username}</Link>: </span>
     ;

@@ -30,7 +30,7 @@ div.large-button {
   box-shadow: 1px 2px 7px gray, 2px 3px 10px black;
 }
 
-div#main-page-button {
+div#main-page-button, div#user-page-button {
   font-size: 15px;
 }
 

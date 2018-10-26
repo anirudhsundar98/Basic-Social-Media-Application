@@ -6,6 +6,7 @@ import { Home } from "./Home";
 import { Settings } from "./Settings";
 import { Post } from "./Post";
 import { User } from "./User";
+import { NotFound } from "./NotFound";
 import config from "./config";
 const serverRoot = config.serverRoot;
 
@@ -104,6 +105,10 @@ export default class App extends Component {
               render={ (routeProps) => (
                 <User {...appProps} {...routeProps} />
               )}
+            />
+            <Route
+              path="/"
+              component={ NotFound }
             />
           </Switch>
         </React.Fragment>

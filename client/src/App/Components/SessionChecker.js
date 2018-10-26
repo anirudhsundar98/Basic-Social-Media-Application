@@ -7,7 +7,7 @@ import config from "../config";
  * The fact that the cookie's expiration date in this app is one year makes it even more meaningless.
  * Implemented simply as an exercise. Component is commented out in the main app.
  * Performance can be augmented with a timeout between session checks (like once every x units of time).
- * This will also reduce the number of requests sent to the server. 
+ * This will also reduce the number of requests sent to the server.
  */
 async function checkSession(sendGraphQLQuery) {
   let graphQLQuery = `{ "query":

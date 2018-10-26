@@ -1,5 +1,6 @@
 import React from 'react';
 import { MainPageButton } from "./MainPageButton";
+import { UserPageButton } from "./UserPageButton";
 import { SettingsButton } from "./SettingsButton";
 import { Logout } from "./Logout";
 import './index.css';
@@ -13,8 +14,13 @@ export function Nav(props) {
   }
 
   let settingsButton = null;
-  if (props.session.username && window.location.pathname === `/users/${props.session.username}`) {
-    settingsButton = <SettingsButton />;
+  let userPageButton = null;
+  if (props.session.username) {
+    if (window.location.pathname === `/users/${escape(props.session.username)}`) {
+      settingsButton = <SettingsButton />;
+    } else {
+      userPageButton = <UserPageButton username={props.session.username} />;
+    }
     navItemCounter++;
   }
 
@@ -27,6 +33,7 @@ export function Nav(props) {
     <nav>
       { settingsButton }
       { mainPageButton }
+      { userPageButton }
       <Logout />
     </nav>
   );

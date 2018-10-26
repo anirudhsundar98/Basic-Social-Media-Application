@@ -12,7 +12,6 @@ let { buildSchema } = require('graphql');
  * rather than just throwing an error.
  * This is a result of incomplete understanding of how graphql functions in the initial stages of the project
  * and too much lazyness to correct it towards the end of the project.
- * It also turned out that this made formatting return data from the fetch requests easier.
  * As a result, a mutation message is returned for all mutations to maintain homogeneity.
  */
 const schemaString = `

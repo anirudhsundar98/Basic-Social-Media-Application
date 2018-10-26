@@ -110,7 +110,8 @@ export class Home extends Component {
     return (
       <div id="main-page-container">
         <NewPostForm 
-          createPost={this.createPost} 
+          createPost={this.createPost}
+          username={this.props.session.username}
         />
 
         <div id="posts-container">
