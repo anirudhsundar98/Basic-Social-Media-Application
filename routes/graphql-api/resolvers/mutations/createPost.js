@@ -1,4 +1,4 @@
-const { executeQuery } = require('../../../helpers/sql-helpers');
+const { executeQuery } = require('../../../helpers/sqlHelpers');
 
 let createPost = async (data, req) => {
   const userID = req.session.userID;
@@ -13,7 +13,7 @@ let createPost = async (data, req) => {
   try {
     await executeQuery(queryString);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return {
       success: false,
       message: err.message

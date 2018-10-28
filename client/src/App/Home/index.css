@@ -30,3 +30,17 @@ textarea#post-content {
   left: 50%;
   transform: translateX(-50%);
 }
+
+/* More Posts Button */
+div#more-posts-button {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 15px;
+}
+
+div.disabled {
+  font-style: italic;
+  color: gray;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NewPostForm from "./NewPostForm";
 import SimplePost from "../Components/SimplePost";
+import MorePostsButton from "./MorePostsButton";
 import config from "../config";
 import "./index.css";
 
@@ -8,45 +9,63 @@ export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      limit: 5,
+      startId: -1
     };
 
     this.createPost = this.createPost.bind(this);
+    this.fetchMorePosts = this.fetchMorePosts.bind(this);
   }
 
   // Get all Posts
-  async fetchPosts() {
+  async fetchPosts(params, overWrite=true) {
     let graphQLQuery = `{ "query":
       "query PostsQuery {
-        getPosts {
-          id
-          user {
+        getAllPosts(${params}) {
+          startId
+          posts {
             id
-            username
-          }
-          comments {
             user {
               id
               username
             }
+            comments {
+              user {
+                id
+                username
+              }
+              content
+              createdAt
+            }
             content
             createdAt
           }
-          content
-          createdAt
         }
       }"
     }`;
 
-    let posts = await this.props.sendGraphQLQuery(graphQLQuery)
-      .then(response => ([...response.data.getPosts]))
+    let response = await this.props.sendGraphQLQuery(graphQLQuery)
+      .then(response => response.data.getAllPosts)
       .catch(err => {
         console.error(err);
         return null;
       });
 
-    this.setState({ posts });
+    if (overWrite) {
+      this.setState({ ...response });
+    } else {
+      this.setState({
+        startId: response.startId,
+        posts: this.state.posts.concat(response.posts)
+      });
+      console.log(this.state);
+    }
   };
+
+  fetchMorePosts() {
+    this.fetchPosts(`limit: ${this.state.limit} endId: ${this.state.startId}`, false);
+  }
 
   // Create a Post
   async createPost() {
@@ -85,12 +104,12 @@ export class Home extends Component {
     }
 
     // Refresh
-    this.fetchPosts();
+    this.fetchPosts(`startId: ${this.state.startId}`);
     document.querySelector("#post-content").value = null;
   }
 
   componentDidMount() {
-    this.fetchPosts();
+    this.fetchPosts(`limit: ${this.state.limit}`);
   }
 
   render() {
@@ -117,6 +136,10 @@ export class Home extends Component {
         <div id="posts-container">
           {posts}
         </div>
+        <MorePostsButton
+          fetchMorePosts={this.fetchMorePosts}
+          startId={this.state.startId}
+        />
       </div>
     );
   }

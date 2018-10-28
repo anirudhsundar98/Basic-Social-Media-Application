@@ -1,4 +1,4 @@
-const { executeQuery } = require('../../../helpers/sql-helpers');
+const { executeQuery } = require('../../../helpers/sqlHelpers');
 
 let userExists = async (data) => {
   let users = [];

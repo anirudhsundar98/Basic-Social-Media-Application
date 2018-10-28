@@ -1,4 +1,4 @@
-const { executeQuery } = require('../../../helpers/sql-helpers');
+const { executeQuery } = require('../../../helpers/sqlHelpers');
 
 let deleteUser = async (data) => {
   if (!data.userId) {

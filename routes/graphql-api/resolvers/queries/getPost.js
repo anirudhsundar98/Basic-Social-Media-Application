@@ -1,5 +1,5 @@
-const { executeQuery } = require('../../../helpers/sql-helpers');
-const { processDate } = require('../../../helpers/date-helpers');
+const { executeQuery } = require('../../../helpers/sqlHelpers');
+const { processDate } = require('../../../helpers/dateHelpers');
 
 let getPost = async (data) => {
   let postsQueryString = `

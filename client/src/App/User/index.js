@@ -14,22 +14,24 @@ export class User extends Component {
   async fetchPosts() {
     let graphQLQuery = `{ "query":
       "query PostsQuery {
-        getPosts(username: \\"${this.props.match.params.username}\\") {
-          id
-          user {
+        getUser(username: \\"${this.props.match.params.username}\\") {
+          posts {
             id
-            username
-          }
-          comments {
             user {
               id
               username
             }
+            comments {
+              user {
+                id
+                username
+              }
+              content
+              createdAt
+            }
             content
             createdAt
           }
-          content
-          createdAt
         }
       }"
     }`;
@@ -44,10 +46,10 @@ export class User extends Component {
 
         return response;
       })
-      .then(response => ([...response.data.getPosts]))
+      .then(response => ([...response.data.getUser.posts]))
       .catch(err => {
         console.error(err);
-        return null;
+        return {};
       });
 
     this.setState({ posts });

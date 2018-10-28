@@ -2,10 +2,8 @@ let { buildSchema } = require('graphql');
 
 /**
  * This schema does not have some features that a complete app would have.
- * For instance, Comment should have a Post field that gives information on its parent post 
- *   However this is unnecessary as the app never fetches comments alone. It always fetches posts and their comments.
- * Similarly, User could have a posts field to represent their posts.
- *   However, user posts are fetched through getPosts to avoid redundant code in the getUser query.
+ * For instance, Comment should have a Post field that gives information on its parent post .
+ * However this is unnecessary as the app never fetches comments alone. It always fetches posts and their comments.
  */
 /**
  * It might also seem weird that MutationMessages are being used for failed requests as well
@@ -18,6 +16,7 @@ const schemaString = `
   type User {
     id: ID!
     username: String!
+    posts: [Post]
   }
 
   type Post {
@@ -40,12 +39,21 @@ const schemaString = `
     message: String
   }
 
+  type PaginatedPostsData {
+    startId: Int
+    posts: [Post]
+  }
+
   type Query {
     userExists(username: String!): Boolean
-    getUser(id: ID!): User
     getCurrentUser: User
+    getUser(username: String!): User
     getPost(id: ID!): Post
-    getPosts(username: String): [Post]
+    getAllPosts(
+      startId: Int
+      endId: Int
+      limit: Int
+    ): PaginatedPostsData
     getSession: Int
   }
 

@@ -1,11 +1,10 @@
-const { executeQuery } = require('../../../helpers/sql-helpers');
+const { executeQuery } = require('../../../helpers/sqlHelpers');
 
 let getCurrentUser = async (data, req) => {
   const userID = req.session.userID;
   if (userID === undefined) {
     throw new Error("Not Logged In");
   }
-
 
   const queryString = `SELECT id, username FROM users WHERE id=${userID}`;
   let user = null;

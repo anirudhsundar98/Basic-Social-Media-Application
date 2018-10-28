@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { executeQuery } = require('../../../helpers/sql-helpers');
+const { executeQuery } = require('../../../helpers/sqlHelpers');
 
 let updateUser = async (data) => {
   let setString = "";

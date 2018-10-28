@@ -18,7 +18,7 @@ export class AuthenticationForm extends Component {
   render() {
     return (
       <React.Fragment>
-        <h2 id="settings-title">Authentication</h2>
+        <h2 id="settings-title">Account Update</h2>
         <input name="password" type="password" id="password-verification" placeholder="Please enter your current password" onKeyDown={this.handleKeyDown} />
       </React.Fragment>
     )

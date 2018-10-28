@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { executeQuery } = require('./helpers/sql-helpers');
+const { executeQuery } = require('./helpers/sqlHelpers');
 const router = express.Router();
 
 router.post('/', async (req, res, next) => {

@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const { noSessionCheck } = require("./middleware/login-middleware");
 const root = require('../config').sendFileRoot;
-const { executeQuery } = require('./helpers/sql-helpers');
+const { executeQuery } = require('./helpers/sqlHelpers');
 const router = express.Router();
 
 router.use(noSessionCheck);
