@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'pwd',
-  database: 'twitter_graphql'
+  host: 'YOUR_HOST',
+  user: 'YOUR_USER',
+  password: 'PASSWORD',
+  database: 'YOUR_DATABASE'
 });
 connection.connect();
 
