@@ -1,5 +1,5 @@
 nav {
-  position: absolute;
+  position: fixed;
   right: 0;
   display: flex;
   flex-direction: column;

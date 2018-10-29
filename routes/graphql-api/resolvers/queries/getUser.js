@@ -43,8 +43,10 @@ let getUser = async (data) => {
   let comments = [];
   let commentsQueryString = `
     SELECT comments.id, comments.user_id AS userId, users.username, comments.post_id AS postId, comments.created_at AS createdAt, comments.content
-    FROM comments LEFT JOIN users
-    ON comments.user_id = users.id
+    FROM (SELECT post_id, MAX(created_at) AS max_created_at FROM comments GROUP BY post_id)
+    AS sorted_comments INNER JOIN comments
+      ON sorted_comments.post_id = comments.post_id AND sorted_comments.max_created_at = comments.created_at
+    INNER JOIN users ON comments.user_id = users.id
     WHERE comments.post_id IN (${ postsIds.join(", ")})
     ORDER BY id;
   `;

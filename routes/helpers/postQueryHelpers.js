@@ -15,9 +15,6 @@ function createHashSet(posts) {
 
 function addCommentsToPosts(postsSet, comments) {
   comments.forEach(comment => {
-    // This is done to get only the latest comment to the post.
-    // This works since comments are ordered by id and id is set to AUTO_INCREMENT.
-    // TODO: Unoptimal. Change Later
     postsSet[comment.postId].comments[0] = comment;
   });
 
