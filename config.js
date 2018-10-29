@@ -1,8 +1,7 @@
 const path = require("path");
 
 const config = {
-  sendFileRoot: path.join(__dirname, '/views'),
-  homeUrl: "http://localhost:8080"
+  sendFileRoot: path.join(__dirname, '/views')
 };
 
 module.exports = config;

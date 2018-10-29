@@ -8,7 +8,7 @@ const resolvers = require("./resolvers");
 router.use('/', graphqlHTTP({
   schema: schema,
   rootValue: resolvers,
-  graphiql: true,
+  graphiql: false,
 }));
 
 module.exports = router;

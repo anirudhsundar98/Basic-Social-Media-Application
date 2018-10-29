@@ -1,5 +1,5 @@
 const config = {
-  serverRoot: "http://localhost:3000"
+  serverRoot: ""
 };
 
 export default config;
