@@ -1,10 +1,6 @@
 const mysql = require('mysql');
-const connection = mysql.createConnection({
-  host: 'YOUR_HOST',
-  user: 'YOUR_USER',
-  password: 'PASSWORD',
-  database: 'YOUR_DATABASE'
-});
+const dbData = require("../../db/db-conf.json");
+const connection = mysql.createConnection(dbData);
 connection.connect();
 
 function executeQuery(query) {
