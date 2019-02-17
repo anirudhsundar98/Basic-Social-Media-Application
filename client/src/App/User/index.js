@@ -48,8 +48,8 @@ export class User extends Component {
       })
       .then(response => ([...response.data.getUser.posts]))
       .catch(err => {
-        console.error(err);
-        return {};
+        console.log(err);
+        return [];
       });
 
     this.setState({ posts });
